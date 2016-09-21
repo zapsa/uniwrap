@@ -1,8 +1,16 @@
 import "babel-polyfill";
 
+let instance = null;
+
 class Uniwrap {
   constructor(definition) {
+    if (!instance) {
+      this.lol = new Date();
+      instance = this;
+    }
+    console.log(this.lol);
     this.def = definition;
+    return instance;
   }
 
   async buildUrl(name, params) {
