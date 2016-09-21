@@ -8,8 +8,7 @@ class Uniwrap {
       this.lol = new Date();
       instance = this;
     }
-    console.log(instance.lol);
-    this.def = definition;
+    this.def = (definition) ? definition : instance.def;
     return instance;
   }
 
