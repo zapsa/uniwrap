@@ -1,4 +1,4 @@
-import "babel-polyfill";
+import 'babel-polyfill';
 
 let instance = null;
 
@@ -15,7 +15,7 @@ class Uniwrap {
   async buildUrl(name, params) {
     const uri = this.def.routes[name].uri;
     const splitted = uri.substr(1).split('/');
-    let finalUrl = this.def.basePath;
+    let finalUrl = this.def.basePath + ((this.def.prefix) ? this.def.prefix : '');
 
     splitted.forEach((part) => {
       let toAdd = part;
@@ -34,7 +34,7 @@ class Uniwrap {
     return finalUrl;
   }
 
-  async createRequest(url, name) {
+  async createRequest(url, name, body) {
     const init = {
       method: this.def.routes[name].method,
       mode: 'cors',
@@ -43,6 +43,9 @@ class Uniwrap {
       init.headers = {
         'Content-Type': this.def.routes[name].contentType,
       };
+    }
+    if (body && this.def.routes[name].method !== 'get') {
+      init.body = body;
     }
     return new Request(url, init);
   }
@@ -59,6 +62,7 @@ class Uniwrap {
     const req = await this.createRequest(url, name, params);
     return fetch(req).then((response) => {
       if (!response.ok) {
+        console.log(response);
         throw new Error('Request error: status is '); // TODO: add status
       }
       switch (this.def.responseType) {
