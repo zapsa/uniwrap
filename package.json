@@ -1,6 +1,6 @@
 {
   "name": "@zapsa/uniwrap",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Just a simple flexible webservice wrapper",
   "main": "uniwrap.js",
   "scripts": {
