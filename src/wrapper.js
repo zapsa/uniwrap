@@ -43,7 +43,6 @@ class Wrapper {
     if (params && params.body && this.def.routes[name].method !== 'get') {
       init.body = params.body;
     }
-    console.log(init);
     return init;
   }
 
@@ -57,11 +56,9 @@ class Wrapper {
     }
     const url = await this.buildUrl(name, params);
     const req = await this.createRequest(name, params);
-    console.log(url);
     return fetch(url, req).then((response) => {
       if (!response.ok) {
-        console.log(response);
-        throw new Error('Request error: status is '); // TODO: add status
+        throw new Error(`Request error: status is ${response.status} (${response.statusText})`); // TODO: add status
       }
       switch (this.def.responseType) {
         case 'blob':

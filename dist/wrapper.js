@@ -10,7 +10,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 require('babel-polyfill');
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -91,11 +91,9 @@ var Wrapper = function () {
                 if (params && params.body && this.def.routes[name].method !== 'get') {
                   init.body = params.body;
                 }
-                console.log(init);
-                // return new Request(url, init);
                 return _context2.abrupt('return', init);
 
-              case 5:
+              case 4:
               case 'end':
                 return _context2.stop();
             }
@@ -139,7 +137,7 @@ var Wrapper = function () {
       var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(name) {
         var _this = this;
 
-        var params = arguments.length <= 1 || arguments[1] === undefined ? { body: {}, headers: {} } : arguments[1];
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { body: {}, headers: {} };
         var url, req;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -163,12 +161,9 @@ var Wrapper = function () {
 
               case 7:
                 req = _context4.sent;
-
-                console.log(url);
                 return _context4.abrupt('return', fetch(url, req).then(function (response) {
                   if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Request error: status is '); // TODO: add status
+                    throw new Error('Request error: status is ' + response.status + ' (' + response.statusText + ')'); // TODO: add status
                   }
                   switch (_this.def.responseType) {
                     case 'blob':
@@ -178,7 +173,7 @@ var Wrapper = function () {
                   }
                 }));
 
-              case 10:
+              case 9:
               case 'end':
                 return _context4.stop();
             }
