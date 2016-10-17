@@ -3,7 +3,7 @@
 ## Install
 
 ```
-npm install --save api-wrappy
+npm install --save @zapsa/wrapper-api
 ```
 
 ## Define
