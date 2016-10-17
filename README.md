@@ -1,5 +1,11 @@
 # Uniwrap
 
+## Install
+
+```
+npm install --save api-wrappy
+```
+
 ## Define
 
 ```javascript
@@ -31,13 +37,13 @@ const def = {
 
 ```javascript
 // app.config.js
-import Wrapper from 'wrapper'; // wrapper inside node_modules
+import Wrappy from 'api-wrappy'; // wrapper inside node_modules
 
 import def from './def.js';
 
-const wrapper = new Wrapper(def);
+const wrapper = new Wrappy(def);
 // OR directly define, whatever
-const wrapper = new Wrapper({...});
+const wrapper = new Wrappy({...});
 
 export default wrapper;
 ```
@@ -45,7 +51,6 @@ export default wrapper;
 ## Use
 
 ```javascript
-// component.jsx
 import wrapper from './app.config.js';
 
 async function apiCalls() {
@@ -67,15 +72,18 @@ async function apiCalls() {
   // OR
   try {
     const user = await wrapper.call('getUser', {id: 24});
-    const userList = await wrapper.call('getUsers');
+    const userList = await wrapper.call('createUser', {
+      headers: {Authorization: 'Bearer <ANiceToken>'},
+      body: {name: 'Foo'},
+    });
     //OR
     const ret = wrapper.callMultiple([
       wrapper.call('getUser', {id: 24}),
-      wrapper.call('getUsers'),
+      wrapper.call('createUser', {...}),
       ...
-    ]); // ret = [{id: 24, name: 'Lol'}, [{id: 1, name: 'Huhu'}, {id: 2, name: 'Hehe'}, ...]]; <- Very powerful
+    ]); // ret = [response for getUser, response for createUser, ...]; <- Very powerful
   } catch(err) {
-    console.log('Error: ', err); // Any error is caught, allelujah!
+    console.log('Error: ', err); // Errors are caught, allelujah!
   }
 }
 ```
