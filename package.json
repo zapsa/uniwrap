@@ -2,7 +2,7 @@
   "name": "@zapsa/wrapper-api",
   "version": "1.0.3",
   "description": "Just a simple flexible webservice wrapper",
-  "main": "wrappy.js",
+  "main": "wrapper.js",
   "scripts": {
     "build": "babel src -d dist",
     "prepublish": "npm run build",

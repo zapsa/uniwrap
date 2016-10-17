@@ -1,4 +1,4 @@
-# Uniwrap
+# API Wrapper
 
 ## Install
 
@@ -37,7 +37,7 @@ const def = {
 
 ```javascript
 // app.config.js
-import Wrappy from 'api-wrappy'; // wrapper inside node_modules
+import Wrappy from '@zapsa/wrapper-api'; // wrapper inside node_modules
 
 import def from './def.js';
 
