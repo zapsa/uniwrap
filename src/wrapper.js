@@ -1,8 +1,4 @@
 import 'babel-polyfill';
-if (process.env.NODE_ENV === 'test') {
-  console.log('test');
-  var fetch = require('node-fetch');
-}
 
 class Wrapper {
   constructor(definition) {

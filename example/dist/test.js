@@ -1,8 +1,12 @@
 'use strict';
 
-var _ = require('./');
+var _nodeFetch = require('node-fetch');
 
-var _2 = _interopRequireDefault(_);
+var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
+
+var _wrapperApi = require('@zapsa/wrapper-api');
+
+var _wrapperApi2 = _interopRequireDefault(_wrapperApi);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,7 +32,7 @@ var def = {
   }
 };
 
-var wrapper = new _2.default(defUn);
+var wrapper = new _wrapperApi2.default(defUn);
 
 wrapper.call('getUser').then(function (data) {
   console.log(data);
@@ -36,7 +40,7 @@ wrapper.call('getUser').then(function (data) {
   console.log(error);
 });
 
-wrapper = new _2.default(def);
+wrapper = new _wrapperApi2.default(def);
 
 wrapper.call('getUser').then(function (data) {
   console.log(data);

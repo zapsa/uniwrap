@@ -5,14 +5,17 @@
   "main": "wrapper.js",
   "scripts": {
     "build": "babel src -d dist",
-    "prepublish": "npm run build"
+    "test": "npm run clean && npm run build && webpack dist/test.js dist/bundle.js && ws",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@zapsa/wrapper-api": "file:../",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-es2016": "^6.11.3",
     "babel-preset-es2017": "^6.14.0",
-    "babel-preset-stage-0": "^6.5.0"
+    "babel-preset-stage-0": "^6.5.0",
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
