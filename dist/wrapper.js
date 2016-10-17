@@ -14,11 +14,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// if (process.env.NODE_ENV === 'test') {
-//   console.log('test');
-//   var fetch = require('node-fetch');
-// }
-
 var Wrapper = function () {
   function Wrapper(definition) {
     _classCallCheck(this, Wrapper);
