@@ -44,7 +44,6 @@ class Wrapper {
       init.body = params.body;
     }
     console.log(init);
-    // return new Request(url, init);
     return init;
   }
 
