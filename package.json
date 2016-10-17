@@ -1,6 +1,6 @@
 {
   "name": "@zapsa/wrapper-api",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Just a simple flexible webservice wrapper",
   "main": "wrapper.js",
   "scripts": {
