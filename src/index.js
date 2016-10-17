@@ -1,3 +1,3 @@
-import Uniwrap from './uniwrap';
+import Wrapper from './wrapper';
 
-export default Uniwrap;
+export default Wrapper;

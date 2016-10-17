@@ -1,11 +1,12 @@
 {
-  "name": "@zapsa/uniwrap",
-  "version": "1.0.19",
+  "name": "@zapsa/wrapper-api",
+  "version": "1.0.0",
   "description": "Just a simple flexible webservice wrapper",
-  "main": "uniwrap.js",
+  "main": "wrappy.js",
   "scripts": {
     "build": "babel src -d dist",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "npm run build && NODE_ENV='test' node dist/test.js"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.14.0",
@@ -16,9 +17,13 @@
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.0.0",
     "eslint": "^3.5.0",
     "eslint-plugin-babel": "^3.3.0"
   },
-  "author": "Julien Ganichot"
+  "author": "Julien Ganichot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zapsa/wrapper-api.git"
+  }
 }

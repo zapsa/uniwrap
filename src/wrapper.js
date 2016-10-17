@@ -1,21 +1,18 @@
-import "babel-polyfill";
+import 'babel-polyfill';
+if (process.env.NODE_ENV === 'test') {
+  console.log('test');
+  var fetch = require('node-fetch');
+}
 
-let instance = null;
-
-class Uniwrap {
+class Wrapper {
   constructor(definition) {
-    if (!instance) {
-      this.lol = new Date();
-      instance = this;
-    }
-    this.def = (definition) ? definition : instance.def;
-    return instance;
+    this.def = definition;
   }
 
   async buildUrl(name, params) {
     const uri = this.def.routes[name].uri;
     const splitted = uri.substr(1).split('/');
-    let finalUrl = this.def.basePath;
+    let finalUrl = this.def.basePath + ((this.def.prefix) ? this.def.prefix : '');
 
     splitted.forEach((part) => {
       let toAdd = part;
@@ -34,31 +31,37 @@ class Uniwrap {
     return finalUrl;
   }
 
-  async createRequest(url, name) {
+  async createRequest(name, params) {
     const init = {
       method: this.def.routes[name].method,
       mode: 'cors',
+      headers: { ...params.headers },
     };
     if (this.def.routes[name].contentType) {
-      init.headers = {
-        'Content-Type': this.def.routes[name].contentType,
-      };
+      init.headers['Content-Type'] = this.def.routes[name].contentType;
     }
-    return new Request(url, init);
+    if (params && params.body && this.def.routes[name].method !== 'get') {
+      init.body = params.body;
+    }
+    console.log(init);
+    // return new Request(url, init);
+    return init;
   }
 
   async callMultiple(pArray) {
     return Promise.all(pArray);
   }
 
-  async call(name, params = { body: {} }) {
+  async call(name, params = { body: {}, headers: {} }) {
     if (!this.def.routes[name]) {
       throw new Error(`No such handler: ${name}`);
     }
     const url = await this.buildUrl(name, params);
-    const req = await this.createRequest(url, name, params);
-    return fetch(req).then((response) => {
+    const req = await this.createRequest(name, params);
+    console.log(url);
+    return fetch(url, req).then((response) => {
       if (!response.ok) {
+        console.log(response);
         throw new Error('Request error: status is '); // TODO: add status
       }
       switch (this.def.responseType) {
@@ -71,4 +74,4 @@ class Uniwrap {
   }
 }
 
-export default Uniwrap;
+export default Wrapper;
