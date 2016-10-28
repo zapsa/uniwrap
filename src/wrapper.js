@@ -1,4 +1,11 @@
-import 'babel-polyfill';
+function generateQueryParams(params) {
+  const enc = encodeURIComponent;
+  const ret = Object.keys(params)
+  .map((key) => enc(key) + '=' + enc(params[key]))
+  .join('&');
+  console.log('Query Params:', ret);
+  return ret;
+}
 
 class Wrapper {
   constructor(definition) {
@@ -23,10 +30,12 @@ class Wrapper {
         finalUrl += `/${toAdd}`;
       }
     });
-    console.log('call to:', finalUrl);
+    if (params.query) {
+      finalUrl += '?' + generateQueryParams(params.query);
+    }
+    console.log('Call to:', finalUrl);
     return finalUrl;
   }
-
   async createRequest(name, params) {
     const init = {
       method: this.def.routes[name].method,

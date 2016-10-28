@@ -50,6 +50,8 @@ export default wrapper;
 
 ## Use
 
+### Syntax
+
 ```javascript
 import wrapper from './app.config.js';
 
@@ -86,4 +88,73 @@ async function apiCalls() {
     console.log('Error: ', err); // Errors are caught, allelujah!
   }
 }
+```
+
+### Use of a body, parameters and headers
+
+```javascript
+const def = {
+  basePath: 'https://api.example.com',
+  routes: {
+    createUser: {
+      uri: '/users',
+      method: 'post',
+      responseType: 'json',
+      contentType: 'json',
+    },
+    getUsers: {
+      uri: '/users',
+      method: 'get',
+      responseType: 'json',
+    }
+    getUser: {
+      uri: '/users/:id/field/:param',
+      method: 'get',
+      responseType: 'json',
+    }
+  }
+}
+
+const wrapper = new Wrapper(def);
+
+// Adding a body
+
+wrapper.call('createUser', {
+  body: {
+    firstName: 'User',
+    lastName: 'One',
+  }
+})
+.then((user) => {...})
+.catch((e) => e);
+
+// Using query parameters
+
+wrapper.call('getUsers', {
+  query: {
+    firstName: 'John',
+    limit: 0,
+  }
+})
+.then((user) => {...})
+.catch((e) => e);
+
+// Using URI params
+
+wrapper.call('getUser', {
+  id: 1,
+  param: ':param value',
+})
+.then((user) => {...})
+.catch((e) => e);
+
+// Overwriting headers
+
+wrapper.call('getUser', {
+  headers: {
+    Authorization: 'Bearer <TOKEN>',
+  }
+})
+.then((user) => {...})
+.catch((e) => e);
 ```

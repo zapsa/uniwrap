@@ -8,11 +8,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-require('babel-polyfill');
-
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function generateQueryParams(params) {
+  var enc = encodeURIComponent;
+  var ret = Object.keys(params).map(function (key) {
+    return enc(key) + '=' + enc(params[key]);
+  }).join('&');
+  console.log('Query Params:', ret);
+  return ret;
+}
 
 var Wrapper = function () {
   function Wrapper(definition) {
@@ -48,10 +55,13 @@ var Wrapper = function () {
                     finalUrl += '/' + toAdd;
                   }
                 });
-                console.log('call to:', finalUrl);
+                if (params.query) {
+                  finalUrl += '?' + generateQueryParams(params.query);
+                }
+                console.log('Call to:', finalUrl);
                 return _context.abrupt('return', finalUrl);
 
-              case 6:
+              case 7:
               case 'end':
                 return _context.stop();
             }

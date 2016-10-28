@@ -1,7 +1,6 @@
-import fetch from 'node-fetch';
-import Wrappy from '@zapsa/wrapper-api';
+import Wrappy from '../../src/wrapper';
 
-var defUn = {
+const defUn = {
   basePath: 'https://mockaroo.com/33a82c40/download?count=1&key=e86be4d',
   routes: {
     getUser: {
@@ -11,11 +10,21 @@ var defUn = {
     }
   }
 }
-
-var def = {
+const def = {
   basePath: 'https://mockaroo.com/33a82c40/download?count=1&key=e86be4d0',
   routes: {
     getUser: {
+      uri: '/',
+      method: 'get',
+      responseType: 'json',
+    }
+  }
+}
+
+const tmp = {
+  basePath: 'http://localhost:4242',
+  routes: {
+    queryReq: {
       uri: '/',
       method: 'get',
       responseType: 'json',
@@ -34,5 +43,27 @@ wrapper = new Wrappy(def);
 
 wrapper
   .call('getUser')
-  .then((data) => {console.log(data);})
+  .then((data) => { document.getElementById('result').innerHTML = JSON.stringify(data[0]); console.log(data);})
   .catch((error) => {console.log(error)})
+
+wrapper = new Wrappy(tmp);
+
+wrapper
+  .call('queryReq', {
+    query: {
+      param1: 1,
+      param2: 'value',
+    }
+  })
+  .then((data) => {console.log(data);})
+  .catch((error) => { document.getElementById('result').innerHTML = error.message; console.log(error)})
+
+  wrapper
+    .call('lol', {
+      query: {
+        param1: 1,
+        param2: 'value',
+      }
+    })
+    .then((data) => {console.log(data);})
+    .catch((error) => {console.log(error)})
