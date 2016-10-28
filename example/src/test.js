@@ -63,6 +63,8 @@ wrapper
       query: {
         param1: 1,
         param2: 'value',
+        notExist: null,
+        sameHere: undefined,
       }
     })
     .then((data) => {console.log(data);})

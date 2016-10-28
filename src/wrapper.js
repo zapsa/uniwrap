@@ -1,7 +1,10 @@
 function generateQueryParams(params) {
   const enc = encodeURIComponent;
   const ret = Object.keys(params)
-  .map((key) => enc(key) + '=' + enc(params[key]))
+  .map((key) => {
+    if (!params[key]) return null
+    return enc(key) + '=' + enc(params[key])
+  })
   .join('&');
   console.log('Query Params:', ret);
   return ret;

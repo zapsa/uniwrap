@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'babel-polyfill',
-    // 'webpack/hot/dev-server',
+    'webpack/hot/dev-server',
     './src/test',
     'webpack-dev-server/client?http://localhost:8080'
   ],
