@@ -15,6 +15,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function generateQueryParams(params) {
   var enc = encodeURIComponent;
   var ret = Object.keys(params).map(function (key) {
+    if (!params[key]) return null;
     return enc(key) + '=' + enc(params[key]);
   }).join('&');
   console.log('Query Params:', ret);
