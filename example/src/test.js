@@ -32,6 +32,18 @@ const tmp = {
   }
 }
 
+const lol = {
+  basePath: 'http://localhost:8081',
+  routes: {
+    login: {
+      uri: '/login/:team',
+      method: 'post',
+      responseType: 'json',
+      contentType: 'application/json',
+    }
+  }
+}
+
 let wrapper = new Wrappy(defUn);
 
 wrapper
@@ -69,3 +81,16 @@ wrapper
     })
     .then((data) => {console.log(data);})
     .catch((error) => {console.log(error)})
+
+    wrapper = new Wrappy(lol);
+
+    wrapper
+      .call('login', {
+        team: 'a',
+        body: JSON.stringify({
+          email: 'julien@zap.lu',
+          hash: 'lol',
+        })
+      })
+      .then((data) => {console.log(data);})
+      .catch((error) => {console.log(error)})

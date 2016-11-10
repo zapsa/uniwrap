@@ -19,6 +19,7 @@ class Wrapper {
     const uri = this.def.routes[name].uri;
     const splitted = uri.substr(1).split('/');
     let finalUrl = this.def.basePath + ((this.def.prefix) ? this.def.prefix : '');
+    const last = this.def.routes[name].uri.slice(-1);
 
     splitted.forEach((part) => {
       let toAdd = part;
@@ -33,12 +34,16 @@ class Wrapper {
         finalUrl += `/${toAdd}`;
       }
     });
+    if (last === '/') {
+      finalUrl += last;
+    }
     if (params.query) {
       finalUrl += '?' + generateQueryParams(params.query);
     }
     console.log('Call to:', finalUrl);
     return finalUrl;
   }
+
   async createRequest(name, params) {
     const init = {
       method: this.def.routes[name].method,
@@ -51,6 +56,7 @@ class Wrapper {
     if (params && params.body && this.def.routes[name].method !== 'get') {
       init.body = params.body;
     }
+    console.log(init);
     return init;
   }
 
