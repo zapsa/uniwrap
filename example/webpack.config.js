@@ -6,7 +6,7 @@ module.exports = {
     'babel-polyfill',
     'webpack/hot/dev-server',
     './src/test',
-    'webpack-dev-server/client?http://localhost:8080'
+    'webpack-dev-server/client?http://localhost:8081'
   ],
   output: {
       publicPath: '/dist/',

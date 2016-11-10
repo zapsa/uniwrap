@@ -33,7 +33,7 @@ var Wrapper = function () {
     key: 'buildUrl',
     value: function () {
       var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(name, params) {
-        var uri, splitted, finalUrl;
+        var uri, splitted, finalUrl, last;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -41,6 +41,7 @@ var Wrapper = function () {
                 uri = this.def.routes[name].uri;
                 splitted = uri.substr(1).split('/');
                 finalUrl = this.def.basePath + (this.def.prefix ? this.def.prefix : '');
+                last = this.def.routes[name].uri.slice(-1);
 
 
                 splitted.forEach(function (part) {
@@ -56,13 +57,18 @@ var Wrapper = function () {
                     finalUrl += '/' + toAdd;
                   }
                 });
+                if (last === '/') {
+                  console.log('Trailing slash');
+                  finalUrl += last;
+                }
+                console.log('URL:', finalUrl);
                 if (params.query) {
                   finalUrl += '?' + generateQueryParams(params.query);
                 }
                 console.log('Call to:', finalUrl);
                 return _context.abrupt('return', finalUrl);
 
-              case 7:
+              case 10:
               case 'end':
                 return _context.stop();
             }
@@ -97,9 +103,10 @@ var Wrapper = function () {
                 if (params && params.body && this.def.routes[name].method !== 'get') {
                   init.body = params.body;
                 }
+                console.log(init);
                 return _context2.abrupt('return', init);
 
-              case 4:
+              case 5:
               case 'end':
                 return _context2.stop();
             }

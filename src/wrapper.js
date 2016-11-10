@@ -19,7 +19,7 @@ class Wrapper {
     const uri = this.def.routes[name].uri;
     const splitted = uri.substr(1).split('/');
     let finalUrl = this.def.basePath + ((this.def.prefix) ? this.def.prefix : '');
-    const last = this.def.routes[name].uri.slice(-1);
+    const last = uri.slice(-1);
 
     splitted.forEach((part) => {
       let toAdd = part;
@@ -34,9 +34,12 @@ class Wrapper {
         finalUrl += `/${toAdd}`;
       }
     });
-    if (last === '/') {
+    console.log('uri', uri, 'last:', last);
+    if (last === '/' && uri !== '/') {
+      console.log('Trailing slash');
       finalUrl += last;
     }
+    console.log('URL:', finalUrl);
     if (params.query) {
       finalUrl += '?' + generateQueryParams(params.query);
     }
