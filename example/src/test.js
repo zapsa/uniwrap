@@ -5,7 +5,7 @@ const def = {
     routes: {
         getEmptyJSON: {
             uri: '/empty',
-            method: 'get',
+            method: 'options',
             responseType: 'json',
         },
         getEmptyBlob: {
@@ -20,7 +20,7 @@ let wrapper = new Wrappy(def);
 
 wrapper.call('getEmptyJSON')
 .then((data) => {
-    $('#result-empty-json').innerHTML = data;
+    $('#result-empty-json').innerHTML = data ? data : 'null';
 })
 .catch((error) => {
     console.log(error)

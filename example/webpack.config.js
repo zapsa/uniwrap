@@ -28,7 +28,8 @@ module.exports = {
         query: {
           presets: ['es2015', 'es2017']
         }
-      }
+    },
+      { test: /\.json$/, loader: "json-loader" }
     ]
   },
   devServer: {

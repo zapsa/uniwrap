@@ -170,8 +170,14 @@ var Wrapper = function () {
               case 7:
                 req = _context4.sent;
                 return _context4.abrupt('return', fetch(url, req).then(function (response) {
+                  if (!response) {
+                    throw new Error('No response');
+                  }
                   if (!response.ok) {
                     throw new Error('Request error: status is ' + response.status + ' (' + response.statusText + ')'); // TODO: add status
+                  }
+                  if (response.status === 204) {
+                    return "";
                   }
                   switch (_this.def.responseType) {
                     case 'blob':

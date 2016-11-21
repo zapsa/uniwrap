@@ -1,3 +1,5 @@
+import mime from 'mime-types';
+
 function generateQueryParams(params) {
   const enc = encodeURIComponent;
   const ret = Object.keys(params)
@@ -75,12 +77,12 @@ class Wrapper {
         throw new Error(`Request error: status is ${response.status} (${response.statusText})`); // TODO: add status
       }
       if (response.status === 204) {
-          return "";
+          return null;
       }
-      switch (this.def.responseType) {
-        case 'blob':
-          return response.blob();
-        case 'json':
+      switch (this.def.content) {
+        case 'text/plain':
+          return response.text();
+        case 'application/json':
           return response.json();
         default:
           return response.text();
