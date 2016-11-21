@@ -6,13 +6,14 @@ module.exports = {
     'babel-polyfill',
     'webpack/hot/dev-server',
     './src/test',
-    'webpack-dev-server/client?http://localhost:8081'
+    'webpack-dev-server/client?http://0.0.0.0:8080'
   ],
   output: {
       publicPath: '/dist/',
       path: __dirname + '/dist',
       filename: 'test.js'
   },
+  devtool: 'source-map',
   debug: true,
   module: {
     loaders: [
@@ -22,7 +23,7 @@ module.exports = {
           path.resolve(__dirname, "./src"),
           path.resolve(__dirname, "../src"),
         ],
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'es2017']

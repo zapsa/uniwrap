@@ -18,7 +18,6 @@ function generateQueryParams(params) {
     if (!params[key]) return null;
     return enc(key) + '=' + enc(params[key]);
   }).join('&');
-  console.log('Query Params:', ret);
   return ret;
 }
 
@@ -41,7 +40,7 @@ var Wrapper = function () {
                 uri = this.def.routes[name].uri;
                 splitted = uri.substr(1).split('/');
                 finalUrl = this.def.basePath + (this.def.prefix ? this.def.prefix : '');
-                last = this.def.routes[name].uri.slice(-1);
+                last = uri.slice(-1);
 
 
                 splitted.forEach(function (part) {
@@ -57,18 +56,15 @@ var Wrapper = function () {
                     finalUrl += '/' + toAdd;
                   }
                 });
-                if (last === '/') {
-                  console.log('Trailing slash');
+                if (last === '/' && uri !== '/') {
                   finalUrl += last;
                 }
-                console.log('URL:', finalUrl);
                 if (params.query) {
                   finalUrl += '?' + generateQueryParams(params.query);
                 }
-                console.log('Call to:', finalUrl);
                 return _context.abrupt('return', finalUrl);
 
-              case 10:
+              case 8:
               case 'end':
                 return _context.stop();
             }
@@ -103,10 +99,9 @@ var Wrapper = function () {
                 if (params && params.body && this.def.routes[name].method !== 'get') {
                   init.body = params.body;
                 }
-                console.log(init);
                 return _context2.abrupt('return', init);
 
-              case 5:
+              case 4:
               case 'end':
                 return _context2.stop();
             }
@@ -181,8 +176,10 @@ var Wrapper = function () {
                   switch (_this.def.responseType) {
                     case 'blob':
                       return response.blob();
-                    default:
+                    case 'json':
                       return response.json();
+                    default:
+                      return response.text();
                   }
                 }));
 

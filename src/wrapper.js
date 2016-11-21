@@ -6,7 +6,6 @@ function generateQueryParams(params) {
     return enc(key) + '=' + enc(params[key])
   })
   .join('&');
-  console.log('Query Params:', ret);
   return ret;
 }
 
@@ -34,16 +33,12 @@ class Wrapper {
         finalUrl += `/${toAdd}`;
       }
     });
-    console.log('uri', uri, 'last:', last);
     if (last === '/' && uri !== '/') {
-      console.log('Trailing slash');
       finalUrl += last;
     }
-    console.log('URL:', finalUrl);
     if (params.query) {
       finalUrl += '?' + generateQueryParams(params.query);
     }
-    console.log('Call to:', finalUrl);
     return finalUrl;
   }
 
@@ -59,7 +54,6 @@ class Wrapper {
     if (params && params.body && this.def.routes[name].method !== 'get') {
       init.body = params.body;
     }
-    console.log(init);
     return init;
   }
 
@@ -74,14 +68,22 @@ class Wrapper {
     const url = await this.buildUrl(name, params);
     const req = await this.createRequest(name, params);
     return fetch(url, req).then((response) => {
+      if (!response) {
+        throw new Error('No response');
+      }
       if (!response.ok) {
         throw new Error(`Request error: status is ${response.status} (${response.statusText})`); // TODO: add status
+      }
+      if (response.status === 204) {
+          return "";
       }
       switch (this.def.responseType) {
         case 'blob':
           return response.blob();
-        default:
+        case 'json':
           return response.json();
+        default:
+          return response.text();
       }
     });
   }
