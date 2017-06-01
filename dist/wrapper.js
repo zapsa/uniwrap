@@ -193,7 +193,6 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
-                  if (_this.def[name].responseType) {}
                   switch (_this.def.routes[name].responseType) {
                     case 'text/plain':
                       return response.text();
