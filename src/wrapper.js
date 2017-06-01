@@ -1,4 +1,4 @@
-import mime from 'mime-types';
+require("babel-polyfill");
 
 function generateQueryParams(params) {
   const enc = encodeURIComponent;
