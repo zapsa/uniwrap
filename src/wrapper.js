@@ -77,6 +77,7 @@ class Wrapper {
       if (response.status === 204) {
           return null;
       }
+      console.log(this.def);
       switch (this.def.content) {
         case 'text/plain':
           return response.text();

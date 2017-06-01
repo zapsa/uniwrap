@@ -193,6 +193,7 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
+                  console.log(_this.def);
                   switch (_this.def.content) {
                     case 'text/plain':
                       return response.text();
