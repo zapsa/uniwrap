@@ -77,14 +77,11 @@ class Wrapper {
       if (response.status === 204) {
           return null;
       }
-      console.log(this.def);
-      switch (this.def.content) {
+      switch (this.def[name].responseType) {
         case 'text/plain':
           return response.text();
-        case 'application/json':
-          return response.json();
         default:
-          return response.text();
+          return response.json();
       }
     });
   }

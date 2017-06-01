@@ -193,14 +193,11 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
-                  console.log(_this.def);
-                  switch (_this.def.content) {
+                  switch (_this.def[name].responseType) {
                     case 'text/plain':
                       return response.text();
-                    case 'application/json':
-                      return response.json();
                     default:
-                      return response.text();
+                      return response.json();
                   }
                 }));
 
