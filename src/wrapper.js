@@ -78,14 +78,14 @@ class Wrapper {
           return null;
       }
       if (this.def[name].responseType) {
-        switch (this.def[name].responseType) {
-          case 'text/plain':
-            return response.text();
-          default:
-            return response.json();
-        }
+
       }
-      return response.json();
+      switch (this.def.routes[name].responseType) {
+        case 'text/plain':
+          return response.text();
+        default:
+          return response.json();
+      }
     });
   }
 }

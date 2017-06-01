@@ -193,15 +193,13 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
-                  if (_this.def[name].responseType) {
-                    switch (_this.def[name].responseType) {
-                      case 'text/plain':
-                        return response.text();
-                      default:
-                        return response.json();
-                    }
+                  if (_this.def[name].responseType) {}
+                  switch (_this.def.routes[name].responseType) {
+                    case 'text/plain':
+                      return response.text();
+                    default:
+                      return response.json();
                   }
-                  return response.json();
                 }));
 
               case 9:
