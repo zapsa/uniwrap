@@ -1,5 +1,3 @@
-require("babel-polyfill");
-
 function generateQueryParams(params) {
   const enc = encodeURIComponent;
   const ret = Object.keys(params)
@@ -79,6 +77,7 @@ class Wrapper {
       if (response.status === 204) {
           return null;
       }
+      console.log(this.def);
       switch (this.def.content) {
         case 'text/plain':
           return response.text();

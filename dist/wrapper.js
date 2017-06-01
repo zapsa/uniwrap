@@ -12,8 +12,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-require("babel-polyfill");
-
 function generateQueryParams(params) {
   var enc = encodeURIComponent;
   var ret = Object.keys(params).map(function (key) {
@@ -181,6 +179,7 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
+                  console.log(_this.def);
                   switch (_this.def.content) {
                     case 'text/plain':
                       return response.text();
