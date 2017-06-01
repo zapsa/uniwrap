@@ -77,12 +77,15 @@ class Wrapper {
       if (response.status === 204) {
           return null;
       }
-      switch (this.def[name].responseType) {
-        case 'text/plain':
-          return response.text();
-        default:
-          return response.json();
+      if (this.def[name].responseType) {
+        switch (this.def[name].responseType) {
+          case 'text/plain':
+            return response.text();
+          default:
+            return response.json();
+        }
       }
+      return response.json();
     });
   }
 }
