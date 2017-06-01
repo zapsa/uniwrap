@@ -4,13 +4,27 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+var _regenerator = require('babel-runtime/regenerator');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function generateQueryParams(params) {
   var enc = encodeURIComponent;
@@ -23,17 +37,17 @@ function generateQueryParams(params) {
 
 var Wrapper = function () {
   function Wrapper(definition) {
-    _classCallCheck(this, Wrapper);
+    (0, _classCallCheck3.default)(this, Wrapper);
 
     this.def = definition;
   }
 
-  _createClass(Wrapper, [{
+  (0, _createClass3.default)(Wrapper, [{
     key: 'buildUrl',
     value: function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(name, params) {
+      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(name, params) {
         var uri, splitted, finalUrl, last;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -81,16 +95,16 @@ var Wrapper = function () {
   }, {
     key: 'createRequest',
     value: function () {
-      var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(name, params) {
+      var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(name, params) {
         var init;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 init = {
                   method: this.def.routes[name].method,
                   mode: 'cors',
-                  headers: _extends({}, params.headers)
+                  headers: (0, _extends3.default)({}, params.headers)
                 };
 
                 if (this.def.routes[name].contentType) {
@@ -118,8 +132,8 @@ var Wrapper = function () {
   }, {
     key: 'callMultiple',
     value: function () {
-      var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(pArray) {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(pArray) {
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
@@ -142,12 +156,12 @@ var Wrapper = function () {
   }, {
     key: 'call',
     value: function () {
-      var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(name) {
+      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(name) {
         var _this = this;
 
         var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { body: {}, headers: {} };
         var url, req;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return _regenerator2.default.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
@@ -179,7 +193,6 @@ var Wrapper = function () {
                   if (response.status === 204) {
                     return null;
                   }
-                  console.log(_this.def);
                   switch (_this.def.content) {
                     case 'text/plain':
                       return response.text();
@@ -205,7 +218,6 @@ var Wrapper = function () {
       return call;
     }()
   }]);
-
   return Wrapper;
 }();
 
