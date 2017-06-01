@@ -8,6 +8,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _mimeTypes = require('mime-types');
+
+var _mimeTypes2 = _interopRequireDefault(_mimeTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -177,12 +183,12 @@ var Wrapper = function () {
                     throw new Error('Request error: status is ' + response.status + ' (' + response.statusText + ')'); // TODO: add status
                   }
                   if (response.status === 204) {
-                    return "";
+                    return null;
                   }
-                  switch (_this.def.responseType) {
-                    case 'blob':
-                      return response.blob();
-                    case 'json':
+                  switch (_this.def.content) {
+                    case 'text/plain':
+                      return response.text();
+                    case 'application/json':
                       return response.json();
                     default:
                       return response.text();
@@ -197,7 +203,7 @@ var Wrapper = function () {
         }, _callee4, this);
       }));
 
-      function call(_x6, _x7) {
+      function call(_x6) {
         return _ref4.apply(this, arguments);
       }
 
