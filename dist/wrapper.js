@@ -196,6 +196,8 @@ var Wrapper = function () {
                   switch (_this.def.routes[name].responseType) {
                     case 'text/plain':
                       return response.text();
+                    case 'blob':
+                      return response.blob();
                     default:
                       return response.json();
                   }
