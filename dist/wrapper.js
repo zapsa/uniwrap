@@ -188,7 +188,7 @@ var Wrapper = function () {
                     throw new Error('No response');
                   }
                   if (!response.ok) {
-                    throw new Error('Request error: status is ' + response.status + ' (' + response.statusText + ')'); // TODO: add status
+                    throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status };
                   }
                   if (response.status === 204) {
                     return null;
