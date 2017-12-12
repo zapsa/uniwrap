@@ -188,7 +188,8 @@ var Wrapper = function () {
                     throw new Error('No response');
                   }
                   if (!response.ok) {
-                    throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status, data: response.data ? response.data : {} };
+                    console.warn(response);
+                    throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status };
                   }
                   if (response.status === 204 || _this.def.routes[name].responseType && _this.def.routes[name].responseType === 'no-content') {
                     return null;
