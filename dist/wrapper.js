@@ -199,7 +199,7 @@ var Wrapper = function () {
 
                           case 2:
                             if (response.ok) {
-                              _context4.next = 8;
+                              _context4.next = 7;
                               break;
                             }
 
@@ -208,33 +208,31 @@ var Wrapper = function () {
 
                           case 5:
                             data = _context4.sent;
+                            throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status, data: data.data };
 
-                            console.warn(response);
-                            throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status, data: data };
-
-                          case 8:
+                          case 7:
                             if (!(response.status === 204 || _this.def.routes[name].responseType && _this.def.routes[name].responseType === 'no-content')) {
-                              _context4.next = 10;
+                              _context4.next = 9;
                               break;
                             }
 
                             return _context4.abrupt('return', null);
 
-                          case 10:
+                          case 9:
                             _context4.t0 = _this.def.routes[name].responseType;
-                            _context4.next = _context4.t0 === 'text/plain' ? 13 : _context4.t0 === 'blob' ? 14 : 15;
+                            _context4.next = _context4.t0 === 'text/plain' ? 12 : _context4.t0 === 'blob' ? 13 : 14;
                             break;
 
-                          case 13:
+                          case 12:
                             return _context4.abrupt('return', response.text());
 
-                          case 14:
+                          case 13:
                             return _context4.abrupt('return', response.blob());
 
-                          case 15:
+                          case 14:
                             return _context4.abrupt('return', response.json());
 
-                          case 16:
+                          case 15:
                           case 'end':
                             return _context4.stop();
                         }

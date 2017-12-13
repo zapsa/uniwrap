@@ -73,8 +73,7 @@ class Wrapper {
       }
       if (!response.ok) {
         const data = await response.json();
-        console.warn(response);
-        throw { message: `Request error: status is ${response.status} (${response.statusText})`, status: response.status, data };
+        throw { message: `Request error: status is ${response.status} (${response.statusText})`, status: response.status, data: data.data };
       }
       if (response.status === 204 || this.def.routes[name].responseType && this.def.routes[name].responseType === 'no-content') {
           return null;
