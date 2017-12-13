@@ -156,60 +156,103 @@ var Wrapper = function () {
   }, {
     key: 'call',
     value: function () {
-      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(name) {
+      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5(name) {
         var _this = this;
 
         var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { body: {}, headers: {} };
         var url, req;
-        return _regenerator2.default.wrap(function _callee4$(_context4) {
+        return _regenerator2.default.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 if (this.def.routes[name]) {
-                  _context4.next = 2;
+                  _context5.next = 2;
                   break;
                 }
 
                 throw new Error('No such handler: ' + name);
 
               case 2:
-                _context4.next = 4;
+                _context5.next = 4;
                 return this.buildUrl(name, params);
 
               case 4:
-                url = _context4.sent;
-                _context4.next = 7;
+                url = _context5.sent;
+                _context5.next = 7;
                 return this.createRequest(name, params);
 
               case 7:
-                req = _context4.sent;
-                return _context4.abrupt('return', fetch(url, req).then(function (response) {
-                  if (!response) {
-                    throw new Error('No response');
-                  }
-                  if (!response.ok) {
-                    console.warn(response);
-                    throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status };
-                  }
-                  if (response.status === 204 || _this.def.routes[name].responseType && _this.def.routes[name].responseType === 'no-content') {
-                    return null;
-                  }
-                  switch (_this.def.routes[name].responseType) {
-                    case 'text/plain':
-                      return response.text();
-                    case 'blob':
-                      return response.blob();
-                    default:
-                      return response.json();
-                  }
-                }));
+                req = _context5.sent;
+                return _context5.abrupt('return', fetch(url, req).then(function () {
+                  var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(response) {
+                    var data;
+                    return _regenerator2.default.wrap(function _callee4$(_context4) {
+                      while (1) {
+                        switch (_context4.prev = _context4.next) {
+                          case 0:
+                            if (response) {
+                              _context4.next = 2;
+                              break;
+                            }
+
+                            throw new Error('No response');
+
+                          case 2:
+                            if (response.ok) {
+                              _context4.next = 8;
+                              break;
+                            }
+
+                            _context4.next = 5;
+                            return response.body.json();
+
+                          case 5:
+                            data = _context4.sent;
+
+                            console.warn(response);
+                            throw { message: 'Request error: status is ' + response.status + ' (' + response.statusText + ')', status: response.status, data: data };
+
+                          case 8:
+                            if (!(response.status === 204 || _this.def.routes[name].responseType && _this.def.routes[name].responseType === 'no-content')) {
+                              _context4.next = 10;
+                              break;
+                            }
+
+                            return _context4.abrupt('return', null);
+
+                          case 10:
+                            _context4.t0 = _this.def.routes[name].responseType;
+                            _context4.next = _context4.t0 === 'text/plain' ? 13 : _context4.t0 === 'blob' ? 14 : 15;
+                            break;
+
+                          case 13:
+                            return _context4.abrupt('return', response.text());
+
+                          case 14:
+                            return _context4.abrupt('return', response.blob());
+
+                          case 15:
+                            return _context4.abrupt('return', response.json());
+
+                          case 16:
+                          case 'end':
+                            return _context4.stop();
+                        }
+                      }
+                    }, _callee4, _this);
+                  }));
+
+                  return function (_x8) {
+                    return _ref5.apply(this, arguments);
+                  };
+                }()));
 
               case 9:
               case 'end':
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       function call(_x6) {

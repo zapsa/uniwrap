@@ -67,13 +67,14 @@ class Wrapper {
     }
     const url = await this.buildUrl(name, params);
     const req = await this.createRequest(name, params);
-    return fetch(url, req).then((response) => {
+    return fetch(url, req).then(async (response) => {
       if (!response) {
         throw new Error('No response');
       }
       if (!response.ok) {
+        const data = await response.body.json();
         console.warn(response);
-        throw { message: `Request error: status is ${response.status} (${response.statusText})`, status: response.status };
+        throw { message: `Request error: status is ${response.status} (${response.statusText})`, status: response.status, data };
       }
       if (response.status === 204 || this.def.routes[name].responseType && this.def.routes[name].responseType === 'no-content') {
           return null;
