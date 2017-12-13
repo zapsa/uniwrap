@@ -204,7 +204,7 @@ var Wrapper = function () {
                             }
 
                             _context4.next = 5;
-                            return response.body.json();
+                            return response.json();
 
                           case 5:
                             data = _context4.sent;

@@ -72,7 +72,7 @@ class Wrapper {
         throw new Error('No response');
       }
       if (!response.ok) {
-        const data = await response.body.json();
+        const data = await response.json();
         console.warn(response);
         throw { message: `Request error: status is ${response.status} (${response.statusText})`, status: response.status, data };
       }
