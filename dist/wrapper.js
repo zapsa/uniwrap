@@ -45,7 +45,7 @@ var Wrapper = function () {
   (0, _createClass3.default)(Wrapper, [{
     key: 'buildUrl',
     value: function () {
-      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(name, params) {
+      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(name, params) {
         var uri, splitted, finalUrl, last;
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
@@ -95,7 +95,7 @@ var Wrapper = function () {
   }, {
     key: 'createRequest',
     value: function () {
-      var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(name, params) {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(name, params) {
         var init;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
@@ -132,7 +132,7 @@ var Wrapper = function () {
   }, {
     key: 'callMultiple',
     value: function () {
-      var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(pArray) {
+      var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(pArray) {
         return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -156,7 +156,7 @@ var Wrapper = function () {
   }, {
     key: 'call',
     value: function () {
-      var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee5(name) {
+      var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(name) {
         var _this = this;
 
         var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { body: {}, headers: {} };
@@ -184,7 +184,7 @@ var Wrapper = function () {
               case 7:
                 req = _context5.sent;
                 return _context5.abrupt('return', fetch(url, req).then(function () {
-                  var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(response) {
+                  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(response) {
                     var data;
                     return _regenerator2.default.wrap(function _callee4$(_context4) {
                       while (1) {
