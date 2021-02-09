@@ -1,5 +1,8 @@
 # API Wrapper
 
+This package is deprecated since it has no use anymore in squareboard-web.
+This repository won't be maintained anymore and will stay here as legacy code.
+
 ## Install
 
 ```
